@@ -47,7 +47,7 @@ if __name__ == '__main__':
 
         update = telegram.update.Update.de_json(request.get_json(force=True), bot)
 
-        command = update.message.text
+        command = update.message is None and update.message.text or None
 
         chat_id = update.message.chat_id
         chat_username = update.message.from_user.username
