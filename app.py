@@ -47,8 +47,11 @@ if __name__ == '__main__':
 
         update = telegram.update.Update.de_json(request.get_json(force=True), bot)
 
-        command = update.message is not None and update.message.text or None
+        if update.effective_user is None:
+            # TODO: I want exit automatically from channel
+            return 'OK'
 
+        command = update.message.text
         chat_id = update.message.chat_id
         chat_username = update.message.from_user.username
 
